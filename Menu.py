@@ -98,9 +98,8 @@ class vacationAdder:
         self.choice.menu.add_radiobutton(label="Vacation",variable=self.type)
         self.choice.menu.add_radiobutton(label="Date",variable=self.type)
 
-        self.mode = Button
-
-
+        self.mode = Button(master,text="View list of vacations",command=self.list)
+        self.mode.grid(row=1,column=3)
 
         #entry labels
         self.nameLabel = Label(master, text="Name of Place",underline=0)
@@ -178,12 +177,8 @@ class vacationAdder:
         #print(Firebase.put("/" + self.country.get()+"/"+self.state.get()))
         #result = Firebase.put("/"+self.country.get()+)
     def list(self):
-        t = Tk.Toplevel(self)
+        t = self.Toplevel(self)
         t.wm_title("Vacation List")
-        l.pack(side="top", fill="both", expand=True, padx=100, pady=100)
-
-
-
 
 if __name__ == "__main__":
     root = Tk()
