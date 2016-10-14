@@ -168,14 +168,16 @@ class vacationAdder:
         noise = self.noise.get()
 
         geolocator = Nominatim()
-        location = geolocator.geocode("1016 Howell Mill Rd, Atlanta, GA 30318")
+        location = geolocator.geocode(address.get())
         print(location.latitude,location.longitude)
+        lat = location.latitude
+        longitude = location.longitude
 
         print("/" + country.title() +"/" + state.title()+ "/" + name.title())
+        result = Firebase.put("/" + country.title()+ "/" + state.title(),name.title(),{"address":address,"Family Oriented":familyOriented,"Setting":setting,"Noise":noise,"lat":lat,"longitude":longitude})
+        print(result)
         print(self.type.get())
 
-        #print(Firebase.put("/" + self.country.get()+"/"+self.state.get()))
-        #result = Firebase.put("/"+self.country.get()+)
     def list(self):
         t = self.Toplevel(self)
         t.wm_title("Vacation List")
