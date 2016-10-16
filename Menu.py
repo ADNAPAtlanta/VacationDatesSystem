@@ -179,8 +179,14 @@ class vacationAdder:
         print(self.type.get())
 
     def list(self):
-        t = self.Toplevel(self)
-        t.wm_title("Vacation List")
+        self.t = Toplevel()
+        #t.title("fdsfds")
+        message = "This is the child window"
+        vacationView = Listbox(self.t)
+        vacationView.pack()
+        button = Button(self.t, text="click me", command=self.list)
+        button.pack()
+
 
 if __name__ == "__main__":
     root = Tk()
