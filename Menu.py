@@ -1,5 +1,11 @@
 from firebase import firebase
-from tkinter import *
+try:
+    # for Python2
+    from Tkinter import *
+except ImportError:
+    # for Python3
+    from tkinter import *
+
 from geopy.geocoders import Nominatim
 
 
@@ -168,13 +174,13 @@ class vacationAdder:
         noise = self.noise.get()
 
         geolocator = Nominatim()
-        location = geolocator.geocode(address.get())
+        location = geolocator.geocode(address)
         print(location.latitude,location.longitude)
         lat = location.latitude
         longitude = location.longitude
 
         print("/" + country.title() +"/" + state.title()+ "/" + name.title())
-        result = Firebase.put("/" + country.title()+ "/" + state.title(),name.title(),{"address":address,"Family Oriented":familyOriented,"Setting":setting,"Noise":noise,"lat":lat,"longitude":longitude})
+        result = Firebase.put("Vacations",str(name.title()),{"Country":str(country.title()),"State":state.title,"address":str(address),"Family Oriented":familyOriented,"Setting":setting,"Noise":noise,"lat":lat,"longitude":longitude})
         print(result)
         print(self.type.get())
 
@@ -182,10 +188,15 @@ class vacationAdder:
         self.t = Toplevel()
         #t.title("fdsfds")
         message = "This is the child window"
+        self.searchEntry = StringVar()
+        searchBar = Entry(self.t,bd=3,textvariable = self.searchEntry)
+        searchBar.pack()
         vacationView = Listbox(self.t)
         vacationView.pack()
         button = Button(self.t, text="click me", command=self.list)
         button.pack()
+
+
 
 
 if __name__ == "__main__":
