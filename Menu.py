@@ -1,4 +1,5 @@
 from firebase import firebase
+
 try:
     # for Python2
     from Tkinter import *
@@ -73,6 +74,8 @@ countries = ["Afghanistan",
 "Uruguay","Uzbekistan","Vanuatu","Venezuela, Bolivarian Republic of","Viet Nam",
 "Virgin Islands, British","Virgin Islands, U.S.",
 "Wallis and Futuna","Western Sahara","Yemen","Zambia","Zimbabwe"]
+
+vacationArray = []
 
 class vacationAdder:
     def __init__(self,master):
@@ -178,23 +181,35 @@ class vacationAdder:
         print(location.latitude,location.longitude)
         lat = location.latitude
         longitude = location.longitude
-
         print("/" + country.title() +"/" + state.title()+ "/" + name.title())
-        result = Firebase.put("Vacations",str(name.title()),{"Country":str(country.title()),"State":state.title,"address":str(address),"Family Oriented":familyOriented,"Setting":setting,"Noise":noise,"lat":lat,"longitude":longitude})
+        result = Firebase.put("Vacations",str(name.title()),{"Country":str(country.title()),"State":state.title(),"address":str(address),"Family Oriented":str(familyOriented),"Setting":str(setting),"Noise":noise,"lat":lat,"longitude":longitude})
         print(result)
         print(self.type.get())
 
     def list(self):
         self.t = Toplevel()
         #t.title("fdsfds")
+        self.searchTerm = StringVar()
         message = "This is the child window"
+
         self.searchEntry = StringVar()
         searchBar = Entry(self.t,bd=3,textvariable = self.searchEntry)
-        searchBar.pack()
+        searchBar.grid(row=1,column=1)
         vacationView = Listbox(self.t)
-        vacationView.pack()
+        vacationView.grid(row=2,column=1)
+        searchButton = Button(self.t,text="Search")
+        searchButton.grid(row=1,column=2)
         button = Button(self.t, text="click me", command=self.list)
-        button.pack()
+        button.grid(row=1,column=1)
+        Firebase.get("/Vacations",None)
+        for vacation in Firebase.get("/Vacations",None):
+            vacationArray.append(vacation)
+            vacationView.insert(END,vacation)
+            print(vacationArray)
+    def organize(self):
+
+
+
 
 
 

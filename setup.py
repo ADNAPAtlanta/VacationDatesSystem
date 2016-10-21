@@ -1,4 +1,6 @@
+import sys
 from distutils.core import setup
+from cx_Freeze import setup,Executable
 import py2exe
 
 setup(
@@ -10,5 +12,6 @@ setup(
     license='ADNAP',
     author='Christian Farley',
     author_email='cfarley95@gmail.com',
-    description=''
+    description='',
+    executables = [Executable("Menu.py")],
 )
