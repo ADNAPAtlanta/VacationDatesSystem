@@ -207,6 +207,8 @@ class vacationAdder:
             vacationView.insert(END,vacation)
             print(vacationArray)
     def organize(self):
+        searchTerm = self.searchTerm.get()
+        
 
 
 
