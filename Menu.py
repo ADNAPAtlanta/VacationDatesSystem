@@ -190,6 +190,8 @@ class vacationAdder:
         self.t = Toplevel()
         #t.title("fdsfds")
         self.searchTerm = StringVar()
+        self.searchCategory = StringVar()
+        self.searchCategory.set("Name")
         message = "This is the child window"
 
         self.searchEntry = StringVar()
@@ -199,6 +201,7 @@ class vacationAdder:
         vacationView.grid(row=2,column=1)
         searchButton = Button(self.t,text="Search")
         searchButton.grid(row=1,column=2)
+        searchCategory = OptionMenu(self.t,self.searchCategory,"State","Country","Family Oriented","Setting","Noise")
         button = Button(self.t, text="click me", command=self.list)
         button.grid(row=1,column=1)
         Firebase.get("/Vacations",None)
@@ -208,7 +211,7 @@ class vacationAdder:
             print(vacationArray)
     def organize(self):
         searchTerm = self.searchTerm.get()
-        
+
 
 
 
